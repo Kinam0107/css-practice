@@ -1,10 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
+
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>使用float属性进行圣杯布局</title>
 </head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 20px;
+  }
+
+  header {
+    line-height: 100px;
+    background-color: aquamarine;
+  }
+
+  footer {
+    line-height: 100px;
+    background-color: burlywood;
+  }
+
+  main {
+    min-width: 200px;
+    padding: 0 200px;
+  }
+
+  article {
+    float: left;
+    width: 100%;
+    height: 600px;
+    background-color: cyan;
+  }
+
+  nav {
+    position: relative;
+    left: -200px;
+    margin-left: -100%;
+    float: left;
+    width: 200px;
+    line-height: 600px;
+    background-color: rosybrown;
+  }
+
+  aside {
+    position: relative;
+    right: -200px;
+    margin-left: -200px;
+    float: left;
+    width: 200px;
+    line-height: 600px;
+    background-color: darkkhaki;
+  }
+
+  /* 清楚子元素浮动造成的高度塌陷问题 */
+  .clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+</style>
+
 <body>
-$END$
+  <header>header</header>
+  <main class="clearfix">
+    <article>
+      <br><br>
+      圣杯布局中要求三列布局的部分，在结构上要求中间盒子优先两侧盒子加载！<br>
+      并且三列布局的两边固定，当中自适应，且当中列要完整显示内容！<br>
+      <br>
+      步骤要点：<br>
+      浮动——搭建完整的布局框架<br>
+      使用margin赋值——调整旁边两列的位置，使三列布局到一行上<br>
+      使用相对定位——调整旁边两列的位置，使两列位置调整到两头<br>
+    </article>
+    <nav>nav</nav>
+    <aside>aside</aside>
+  </main>
+  <footer>footer</footer>
 </body>
+
 </html>
