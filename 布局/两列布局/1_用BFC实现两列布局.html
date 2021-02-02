@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>使用BFC实现两列布局</title>
+</head>
+<style type="text/css">
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    min-width: 600px;
+  }
+
+
+  #left {
+    /* 设置浮动 */
+    float: left;
+    width: 100px;
+    line-height: 200px;
+    text-align: center;
+    background-color: pink;
+  }
+
+  /* BFC的区域不会与float box重叠 */
+  #right {
+    line-height: 300px;
+    text-align: center;
+    background-color: hotpink;
+    /* overflow不为visible，开启元素的BFC */
+    overflow: hidden;
+  }
+</style>
+<body>
+<div id="left">left</div>
+<div id="right">right</div>
+</body>
+</html>
