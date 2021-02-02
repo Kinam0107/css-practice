@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>已知宽高的元素的垂直水平居中</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #wrapper {
+      /*开启父元素定位*/
+      position: relative;
+      width: 400px;
+      height: 800px;
+      background-color: hotpink;
+      margin: 0 auto;
+    }
+
+    #inner {
+      /*开启绝对定位*/
+      position: absolute;
+      /*
+        开启绝对定位后
+        绝对定位的宽高都由内容撑开
+        水平方向需要满足等式： left + margin-left + border-left + padding-left + width + padding-right + border-right + margin-right + right = 包含块padding区域的宽度
+        垂直方向需要满足等式： top + margin-top + border-top + padding-top + height + padding-bottom + border-bottom + margin-bottom + bottom = 包含块padding区域的高度
+        当等式不满足相等要求时，会自动给值为auto的属性增加相差的部分
+        当left、right为0，width为定值，margin-left、margin-right为auto时，剩余部分会均分到auto上，使定位元素水平居中
+        当top、bottom为0，height为定值，margin-top、margin-bottom为auto时，剩余部分会均分到auto上，使定位元素垂直居中
+        width、height和margin同时为auto时，width、height优先级比较高，会优先将width、height填充满剩余部分，所以left、top、right、bottom指定为0，width、height为默认auto时，元素填满包含块的padding区域
+      */
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+
+      width: 100px;
+      height: 100px;
+      background-color: pink;
+    }
+  </style>
+</head>
+<body>
+<div id="wrapper">
+  <div id="inner">
+    test
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>已知宽高的元素的垂直水平居中</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #wrapper {
+      /*开启父元素定位*/
+      position: relative;
+
+      width: 400px;
+      height: 800px;
+      background-color: hotpink;
+      margin: 0 auto;
+    }
+
+    #inner {
+      /*开启绝对定位*/
+      position: absolute;
+      /*左上角的点向右偏移50%*/
+      left: 50%;
+      /*左上角的点向下偏移50%*/
+      top: 50%;
+      /*向左移动元素自身宽度的一半*/
+      margin-left: -50px;
+      /*向上移动元素自身高度的一半*/
+      margin-top: -50px;
+
+      width: 100px;
+      height: 100px;
+      background-color: pink;
+    }
+  </style>
+</head>
+<body>
+<div id="wrapper">
+  <div id="inner">
+    test
+  </div>
+</div>
+</body>
+</html>
