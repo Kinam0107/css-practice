@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>图片垂直居中</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #wrapper {
+      width: 400px;
+      height: 400px;
+      border: 1px solid;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    #wrapper::after {
+      content: "";
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle;
+    }
+
+    #wrapper img {
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+<div id="wrapper">
+  <img src="../../img/heli.jpg" alt="图片" width="150">
+</div>
+</body>
+</html>
