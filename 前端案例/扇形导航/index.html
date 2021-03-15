@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>扇形导航</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="wrap">
+  <div class="inner">
+    <img src="img/clos.png" alt="">
+    <img src="img/full.png" alt="">
+    <img src="img/open.png" alt="">
+    <img src="img/prev.png" alt="">
+    <img src="img/refresh.png" alt="">
+  </div>
+  <div class="home"></div>
+</div>
+</body>
+<script>
+  window.onload = function () {
+    // 图标弹出距离
+    const POP_UP_DISTANCE = 150;
+    // 图标弹出耗时
+    const POP_UP_TRANSITION_DURATION = 1;
+    // 图标弹出间隔
+    const POP_UP_INTERVAL_DURATION = 0.1;
+
+    const homeEle = document.querySelector("#wrap > .home");
+    const imgArr = document.querySelectorAll("#wrap > .inner > img");
+
+    let flag = true;
+    homeEle.onclick = function () {
+      for (let i = 0; i < imgArr.length; i++) {
+        imgArr[i].style.transitionDuration = POP_UP_TRANSITION_DURATION + 's';
+      }
+      this.style.transitionDuration = POP_UP_TRANSITION_DURATION + imgArr.length * POP_UP_INTERVAL_DURATION + 's';
+      if (flag) {
+        this.style.transform = "rotate(-360deg)"
+        for (let i = 0, deg = 0; i < imgArr.length; i++, deg += 90 / (imgArr.length - 1)) {
+          imgArr[i].style.left = getPoint(POP_UP_DISTANCE, deg).left + 'px';
+          imgArr[i].style.top = getPoint(POP_UP_DISTANCE, deg).top + 'px';
+          imgArr[i].style.transform = "rotate(360deg) scale(1)";
+          imgArr[i].style.transitionDelay = i * POP_UP_INTERVAL_DURATION + 's';
+        }
+      } else {
+        for (let i = 0; i < imgArr.length; i++) {
+          imgArr[i].style.left = '0';
+          imgArr[i].style.top = '0';
+          imgArr[i].style.transform = "rotate(0deg) scale(1)";
+          imgArr[i].style.transitionDelay = (imgArr.length - 1 - i) * POP_UP_INTERVAL_DURATION + 's';
+        }
+        this.style.transform = "rotate(0deg)";
+      }
+      flag = !flag;
+    }
+
+    for (let i = 0; i < imgArr.length; i++) {
+      imgArr[i].onclick = function () {
+        this.style.transitionDelay = '0s';
+        this.style.transitionDuration = POP_UP_TRANSITION_DURATION/2 + 's';
+        this.style.transform = 'rotate(360deg) scale(1.5)';
+        this.style.opacity = '.3';
+        this.addEventListener("transitionend", function fn() {
+          this.style.transitionDuration = POP_UP_TRANSITION_DURATION/3 + 's';
+          this.style.transform = 'rotate(360deg) scale(1)';
+          this.style.opacity = '1';
+          this.removeEventListener("transitionend", fn)
+        })
+      }
+    }
+
+    // 获取导航图标弹出后的中心点相对坐标
+    function getPoint(c, deg) {
+      const x = Math.round(c * Math.sin(-deg * Math.PI / 180));
+      const y = -Math.round(c * Math.cos(-deg * Math.PI / 180));
+      return {left: x, top: y};
+    }
+  }
+</script>
+</html>
