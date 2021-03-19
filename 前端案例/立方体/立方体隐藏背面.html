@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>立方体隐藏背面</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #wrap {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      width: 300px;
+      height: 300px;
+      border: 1px solid;
+      perspective: 200px;
+      background-image: url("img/bg.jpg");
+      background-size: 100% 100%;
+    }
+
+    #wrap > .box:nth-child(1) {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 125px;
+      bottom: 0;
+      margin: auto;
+      width: 100px;
+      height: 100px;
+      transition: 5s;
+      transform-style: preserve-3d;
+      transform-origin: center center -50px;
+    }
+
+    #wrap > .box:nth-child(2) {
+      position: absolute;
+      left: 125px;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      width: 100px;
+      height: 100px;
+      transition: 5s;
+      transform-style: preserve-3d;
+      transform-origin: center center -50px;
+    }
+
+    #wrap > .box:nth-child(1) > div {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-color: rgba(255, 192, 203, .3);
+      text-align: center;
+      font: 30px/100px "微软雅黑";
+    }
+
+    #wrap > .box:nth-child(2) > div {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-color: rgba(255, 192, 203, .3);
+      text-align: center;
+      font: 30px/100px "微软雅黑";
+      backface-visibility: hidden;
+    }
+
+
+    #wrap > .box > div:nth-child(2) {
+      transform: translateZ(-100px) rotateX(180deg);
+    }
+
+    #wrap > .box > div:nth-child(3) {
+      left: -100px;
+      transform-origin: right;
+      transform: rotateY(-90deg);
+    }
+
+    #wrap > .box > div:nth-child(4) {
+      right: -100px;
+      transform-origin: left;
+      transform: rotateY(90deg);
+    }
+
+    #wrap > .box > div:nth-child(5) {
+      top: -100px;
+      transform-origin: bottom;
+      transform: rotateX(90deg);
+    }
+
+    #wrap > .box > div:nth-child(6) {
+      bottom: -100px;
+      transform-origin: top;
+      transform: rotateX(-90deg);
+    }
+
+    #wrap:hover > .box {
+      transform: rotateX(360deg) rotateY(360deg);
+    }
+  </style>
+</head>
+<body>
+<div id="wrap">
+  <div class="box">
+    <div>前</div>
+    <div>后</div>
+    <div>左</div>
+    <div>右</div>
+    <div>上</div>
+    <div>下</div>
+  </div>
+  <div class="box">
+    <div>前</div>
+    <div>后</div>
+    <div>左</div>
+    <div>右</div>
+    <div>上</div>
+    <div>下</div>
+  </div>
+</div>
+</body>
+</html>
