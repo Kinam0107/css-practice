@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>开机动画3D</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    #wrap {
+      height: 100%;
+      position: relative;
+      background-color: pink;
+    }
+
+    #wrap > .inner {
+      width: 33.3%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      transform-style: preserve-3d;
+    }
+
+    #wrap > .inner > img {
+      width: 100%;
+      animation: move 2s linear infinite;
+    }
+
+    @keyframes move {
+      from {
+        transform: rotateY(0deg);
+      }
+      to {
+        transform: rotateY(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+<div id="wrap">
+  <div class="inner">
+    <img src="img/load/logo2.png" alt="">
+    <p>已加载0%</p>
+  </div>
+</div>
+</body>
+<script src="js/data.js"></script>
+<script>
+  window.onload = function () {
+    var pNode = document.querySelector("#wrap > .inner > p");
+    var flag = 0;
+    var arr = [];
+    for (var item in imgData) {
+      arr = arr.concat(imgData[item]);
+    }
+    for (var i = 0; i < arr.length; i++) {
+      var img = new Image();
+      img.src = arr[i];
+      img.onload = function () {
+        flag++;
+        pNode.innerHTML = "已加载" + Math.round(flag / arr.length * 100) + "%"
+      }
+      img.onerror = function () {
+        console.log("地址有问题")
+      }
+    }
+  }
+</script>
+</html>
