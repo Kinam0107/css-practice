@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+<head>
+  <meta charset="UTF-8">
+  <title>clientW&H-offsetW&H</title>
+  <style>
+    #wrap {
+      width: 200px;
+      height: 200px;
+      padding: 50px;
+      margin: 60px;
+      border: 10px solid;
+    }
+  </style>
+</head>
+<body id="body">
+<div id="wrap">
+  wrap
+</div>
+</body>
+<script>
+  window.onload = function () {
+    var wrap = document.querySelector("#wrap");
+    // clientWidth：padding box（可视区域）
+    console.log(wrap.clientWidth, wrap.clientHeight);
+    // offsetWidth：padding box（可视区域）+ border
+    console.log(wrap.offsetWidth, wrap.offsetHeight);
+  }
+</script>
+</html>

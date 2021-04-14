@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>兼容版本</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #test {
+      margin: auto;
+      height: 200px;
+      background-color: pink;
+    }
+  </style>
+</head>
+<body style="height: 3000px;">
+<div id="test"></div>
+</body>
+<script>
+  window.onload = function () {
+    var testNode = document.querySelector("#test");
+    //火狐
+    if (testNode.addEventListener) {
+      testNode.addEventListener("DOMMouseScroll", fn)
+    }
+    //非火狐浏览器
+    testNode.onmousewheel = fn;
+
+    function fn(ev) {
+      ev = ev || event;
+      var dir = "";
+      // 非火狐
+      if (ev.wheelDelta) {
+        dir = ev.wheelDelta > 0 ? 'up' : 'down';
+      }
+      // 火狐
+      if (ev.detail) {
+        dir = ev.detail < 0 ? 'up' : 'down';
+      }
+      switch (dir) {
+        case "up":
+          testNode.style.height = testNode.offsetHeight - 10 + 'px';
+          break;
+        case "down":
+          testNode.style.height = testNode.offsetHeight + 10 + 'px';
+          break;
+      }
+
+      // 禁止事件的默认行为 dom2
+      if(ev.preventDefault){
+        ev.preventDefault();
+      }
+
+      // 禁止事件的默认行为 dom0
+      return false;
+    }
+  }
+</script>
+</html>

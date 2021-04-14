@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+<head>
+  <meta charset="UTF-8">
+  <title>parentNode</title>
+  <style>
+    #inner2 {
+      position: absolute;
+    }
+    #wrap {
+      position: relative;
+    }
+  </style>
+</head>
+<body id="body">
+<div id="wrap">wrap
+  <div id="inner1">inner1
+    <div id="inner2">inner2</div>
+  </div>
+</div>
+</body>
+<script>
+  window.onload = function () {
+    var inner2 = document.querySelector("#inner2");
+    // parentNode 直接父级
+    console.log(inner2.parentNode.id);
+  }
+</script>
+</html>

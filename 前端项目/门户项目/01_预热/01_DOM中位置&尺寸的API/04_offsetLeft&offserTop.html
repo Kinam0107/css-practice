@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+<head>
+  <meta charset="UTF-8">
+  <title>offsetLeft&offsetTop</title>
+  <style>
+    html,body{
+      height: 100%;
+      overflow: hidden;
+    }
+
+    #wrap {
+      position: absolute;
+      background-color: pink;
+      left: 100px;
+      top: 50px;
+    }
+
+    #inner1 {
+      position: fixed;
+      background-color: deeppink;
+      left: 50px;
+      top: 150px;
+    }
+
+    #inner2 {
+      position: relative;
+      background-color: hotpink;
+      left: 80px;
+      top: 70px;
+    }
+
+    #inner3 {
+      position: fixed;
+      background-color: yellow;
+      left: 60px;
+      top: 30px;
+    }
+
+    div {
+      width: 200px;
+      height: 200px;
+    }
+  </style>
+</head>
+<body id="body">
+<div id="wrap">wrap
+  <div id="inner1">inner1
+    <div id="inner2">inner2
+      <div id="inner3">inner3</div>
+    </div>
+  </div>
+</div>
+</body>
+<script>
+  /*
+    offsetLeft和offsetTop是参照于offsetParent的内边距边界的
+    dom里所有的元素都是有offsetLeft和offsetTop的
+   */
+  window.onload = function () {
+    console.log(inner2.offsetLeft, inner2.offsetTop);
+  }
+</script>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>气泡效果</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background-color: darkgray;
+    }
+
+    canvas {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      background-color: white;
+    }
+  </style>
+</head>
+<body>
+<canvas width="150" height="400"></canvas>
+</body>
+<script>
+  window.onload = function () {
+    var oc = document.querySelector("canvas");
+    if (oc.getContext) {
+
+      var ctx = oc.getContext('2d');
+      var arr = [];
+
+
+      // 向arr中注入随机圆的信息
+      setInterval(function () {
+        var r = Math.random() * 6 + 2;
+        var x = Math.random() * oc.width;
+        var y = oc.height - r;
+        var red = Math.round(Math.random() * 255);
+        var green = Math.round(Math.random() * 255);
+        var blue = Math.round(Math.random() * 255);
+        var alp = 1;
+        var deg = 0;
+        var startX = x;
+        var startY = y;
+        var step = 50;
+        var ratio = Math.random() * 1.5
+        arr.push({
+          x: x,
+          y: y,
+          r: r,
+          red: red,
+          green: green,
+          blue: blue,
+          alp: alp,
+          deg: deg,
+          startX: startX,
+          startY: startY,
+          step: step,
+          ratio: ratio
+        })
+        console.log(arr);
+      }, 300);
+
+
+      //将数组中的圆绘制到画布上
+      setInterval(function () {
+        ctx.clearRect(0, 0, oc.width, oc.height);
+        for (var i = 0; i < arr.length; i++) {
+          arr[i].deg++;
+          arr[i].x = arr[i].startX + Math.sin(arr[i].deg * Math.PI / 180) * arr[i].step * arr[i].ratio;
+          arr[i].y = arr[i].startY - (arr[i].deg * Math.PI / 180) * arr[i].step * 2;
+          if (arr[i].y < 0) {
+            arr.splice(i, 1);
+          }
+          ctx.save();
+          ctx.fillStyle = 'rgba(' + arr[i].red + ',' + arr[i].green + ',' + arr[i].blue + ',' + arr[i].alp + ')';
+          ctx.beginPath();
+          ctx.arc(arr[i].x, arr[i].y, arr[i].r, 0, 2 * Math.PI);
+          ctx.fill();
+          ctx.restore();
+        }
+      }, 1000 / 60)
+
+
+    }
+  }
+</script>
+</html>

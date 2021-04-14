@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>获取滚动条滚动的距离</title>
+</head>
+<body>
+<div style="height: 3000px; width: 3000px"></div>
+</body>
+<script>
+  window.onscroll = function () {
+    // 滚动条滚动时，元素滚动的距离
+    var L = document.documentElement.scrollLeft || document.body.scrollLeft;
+    var T = document.documentElement.scrollTop || document.body.scrollTop;
+    console.log(L, T);
+  }
+</script>
+</html>

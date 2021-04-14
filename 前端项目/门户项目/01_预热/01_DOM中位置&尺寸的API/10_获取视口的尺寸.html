@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" id="html" style="margin: 50px;">
+<head>
+  <meta charset="UTF-8">
+  <title>获取视口的尺寸</title>
+  <style>
+    html, body{
+      overflow: hidden;
+    }
+    #wrap {
+      width: 200px;
+      height: 200px;
+      padding: 50px;
+      margin: 60px;
+      border: 10px solid;
+    }
+  </style>
+</head>
+<body id="body">
+<div id="wrap">
+  wrap
+</div>
+</body>
+<script>
+  window.onload = function () {
+    //document.documentElement.clientWidth并不是根标签的可视区域，就是视口的大小
+    var w = document.documentElement.clientWidth;
+    var h = document.documentElement.clientHeight;
+    //document.documentElement.clientWidth  根标签border-box
+    var w2 = document.documentElement.offsetWidth;
+    var h2 = document.documentElement.offsetHeight;
+    console.log(w, h);
+    console.log(w2, h2);
+    /*
+      注意！！！
+      在ie10及ie10以下，跟标签的clientWidth和offsetWidth统一被指定为视口的宽度
+     */
+  }
+</script>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>滚轮方向</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #test {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      width: 200px;
+      height: 200px;
+      background-color: pink;
+    }
+  </style>
+</head>
+<body>
+<div id="test"></div>
+</body>
+<script>
+  window.onload = function () {
+    var testNode = document.querySelector("#test");
+    //火狐
+    if (testNode.addEventListener) {
+      testNode.addEventListener("DOMMouseScroll", function (ev) {
+        ev=ev||event;
+        // 向上负值，向下正值
+        console.log(ev.detail);
+      })
+    }
+    //非火狐浏览器
+    testNode.onmousewheel = function (ev) {
+      ev = ev || event;
+      // 向上正值，向下负值
+      console.log(ev.wheelDelta);
+    }
+  }
+</script>
+</html>

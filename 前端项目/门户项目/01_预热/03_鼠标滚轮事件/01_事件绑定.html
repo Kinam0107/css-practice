@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>事件绑定</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #test {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      width: 200px;
+      height: 200px;
+      background-color: pink;
+    }
+  </style>
+</head>
+<body>
+<div id="test"></div>
+</body>
+<script>
+  window.onload = function () {
+    var testNode = document.querySelector("#test");
+    //火狐
+    if (testNode.addEventListener) {
+      testNode.addEventListener("DOMMouseScroll", function () {
+        console.log("我在滚");
+      })
+    }
+    //非火狐浏览器
+    testNode.onmousewheel = function () {
+      console.log("我在滚");
+    }
+  }
+</script>
+</html>
