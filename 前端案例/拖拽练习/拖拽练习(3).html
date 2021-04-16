@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>拖拽练习</title>
+  <style>
+    #box1 {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+
+    #box2 {
+      position: absolute;
+      left: 200px;
+      top: 200px;
+      width: 100px;
+      height: 100px;
+      background-color: yellow;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      /**
+       * 拖拽box1元素
+       *  拖拽的流程
+       *    1.当鼠标在被拖拽元素上按下时，开始拖拽 onmousedown
+       *    2.当鼠标移动时被拖拽元素跟随鼠标移动 onmousemove
+       *    3.当鼠标松开时，被拖拽元素固定在当前位置 onmouseup
+       */
+
+      var box1 = document.getElementById("box1");
+      var box2 = document.getElementById("box2");
+      drag(box1);
+      drag(box2);
+
+      /*
+      提取一个专门用来设置拖拽的函数
+       */
+      function drag(obj) {
+        //为obj绑定一个鼠标按下事件
+        //鼠标在被拖拽元素上按下时，开始拖拽 onmousedown
+        obj.onmousedown = function (event) {
+
+          // IE8 设置obj捕获所有鼠标按下的事件
+          obj.setCapture && obj.setCapture();
+
+          event = event || window.event;
+          var ol = event.clientX - obj.offsetLeft;
+          var ot = event.clientY - obj.offsetTop;
+          //为document绑定一个onmousemove事件
+          document.onmousemove = function (event) {
+            event = event || window.event;
+            //当鼠标移动时被拖拽元素跟随鼠标移动 onmousemove
+            //获取鼠标坐标
+            var left = event.clientX - ol;
+            var top = event.clientY - ot;
+            //修改obj的位置
+            obj.style.left = left + 'px';
+            obj.style.top = top + 'px';
+          }
+          //为元素绑定一个鼠标松开事件
+          document.onmouseup = function () {
+            //当鼠标松开时，被拖拽元素固定在当前位置 onmouseup
+            //取消document的onmousemove事件
+            document.onmousemove = null;
+            //取消document的onmouseup事件
+            document.onmouseup = null;
+
+            // IE8 取消obj捕获所有鼠标按下的事件
+            obj.releaseCapture && obj.releaseCapture();
+          }
+
+          /**
+           * 当我们拖拽一个网页中的内容时，浏览器会默认去搜索引擎中搜索内容
+           * 此时会导致拖拽功能的异常，这个是浏览器提供的默认行为
+           * 如果不希望发生这个行为，可以通过return false来取消默认行为
+           *
+           * 但是这招对IE8不兼容
+           */
+          return false;
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+<div id="box1"></div>
+<div id="box2"></div>
+</body>
+</html>
