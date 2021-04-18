@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>简单轮播图</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    /*设置outer样式*/
+    #outer {
+      position: relative;
+      width: 520px;
+      height: 333px;
+      margin: 100px auto;
+      background-color: yellowgreen;
+      padding: 10px 0;
+      overflow: hidden;
+    }
+
+    #imgList {
+      position: absolute;
+      left: 0;
+      list-style: none;
+      transition: 1s left;
+    }
+
+    #imgList > li {
+      float: left;
+      margin: 0 10px;
+    }
+
+    #navDiv {
+      position: absolute;
+      bottom: 15px;
+      width: 100%;
+      text-align: center;
+    }
+
+    #navDiv a {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: white;
+    }
+
+    #navDiv a:hover {
+      background-color: gray;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      var flag = 0;
+      var timer = 0;
+      var imgList = document.getElementById("imgList");
+      var imgArr = document.getElementsByTagName("img");
+      var aNodes = document.getElementsByTagName("a");
+      imgList.style.width = 520 * imgArr.length + "px";
+      aNodes[flag].style.backgroundColor = "gray";
+      for (var i = 0; i < aNodes.length; i++) {
+        aNodes[i].index = i;
+        aNodes[i].onclick = function () {
+          flag = this.index;
+          move();
+          lunbo();
+        }
+      }
+      lunbo()
+
+      function move() {
+        imgList.style.left = -520 * flag + "px";
+        for (var i = 0; i < aNodes.length; i++) {
+          aNodes[i].style.backgroundColor = "";
+        }
+        aNodes[flag].style.backgroundColor = "gray";
+      }
+
+      function lunbo() {
+        clearInterval(timer);
+        timer = setInterval(function () {
+          flag++;
+          flag %= imgArr.length;
+          move()
+        }, 2000)
+      }
+    }
+  </script>
+</head>
+<body>
+<!--创建一个外部的div，来作为大的容器-->
+<div id="outer">
+  <!--创建一个ul，用于放置图片-->
+  <ul id="imgList">
+    <li><img src="img/1.jpg" alt=""></li>
+    <li><img src="img/2.jpg" alt=""></li>
+    <li><img src="img/3.jpg" alt=""></li>
+    <li><img src="img/4.jpg" alt=""></li>
+    <li><img src="img/5.jpg" alt=""></li>
+    <li><img src="img/1.jpg" alt=""></li>
+  </ul>
+  <!--创建导航按钮-->
+  <id id="navDiv">
+    <a href="javascript:;"></a>
+    <a href="javascript:;"></a>
+    <a href="javascript:;"></a>
+    <a href="javascript:;"></a>
+    <a href="javascript:;"></a>
+  </id>
+</div>
+</body>
+</html>
